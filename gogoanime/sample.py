@@ -16,6 +16,15 @@ def search_episode(episode):
 def search_multi_episode(episode):
 
 	multi_episode_name = [name_of_anime.lower()+str(x) for x in episode[:4]]
+
+	item = []
+	
+	for d in data:
+		for m in multi_episode_name:
+			if d.get('title').lower() == m:
+				item.append([d.get('download_link'), d.get('title')])
+
+	return item
 	# to do 
 	# multi = []
 	# try:
@@ -59,7 +68,10 @@ def prompt_user_to_enter():
 
 		episode = [int(x) for x in input("Enter multiple value: ").split()]
 		mu_ep = search_multi_episode(episode)
-		print(mu_ep)
+		
+		for i in mu_ep:
+			download_only_single_episodes(i[0], i[1])
+		print("Finished")
 
 
 prompt_user_to_enter()
